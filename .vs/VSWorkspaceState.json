@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bots",
+    "\\cognitiveModels",
+    "\\dialogs",
+    "\\PostDeployScripts",
+    "\\Properties",
+    "\\Properties\\PublishProfiles"
+  ],
+  "SelectedNode": "\\bots\\dialogAndWelcomeBot.js",
+  "PreviewInSolutionExplorer": false
+}
