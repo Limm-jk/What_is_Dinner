@@ -1,62 +1,38 @@
-# core-bot
+# 저녁 뭐먹지
 
-Demonstrate the core capabilities of the Microsoft Bot Framework
+## 목적
+* 편의점의 할인 / 추가 증정 이벤트 등을 모아서 알려주고, 메뉴를 추천해주는 챗봇입니다.
+* 알기 어려운 편의점 레시피를 추천해줍니다.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to:
+## 기능 
+* 편의점 이벤트 정보 확인(크롤러 이용, 매일 업데이트)
+* 최근 많은 좋아요를 받은 메뉴 추천(추천 후, 좋았다 별로였다 확인 가능하도록 구현)
+* 특정 메뉴를 고르면 그 메뉴를 기반으로 한 편의점 레시피 추천. or 어떤 스타일의 레시피 추천
 
-- Use [LUIS](https://www.luis.ai) to implement core AI capabilities
-- Implement a multi-turn conversation using Dialogs
-- Handle user interruptions for such things as `Help` or `Cancel`
-- Prompt for and validate requests for information from the user
-- Demonstrate how to handle any unexpected errors
+### 사용 기술
+MS Bot Framework / Node.JS / Python / Azure
 
-## Prerequisites
+## 구조
 
-This template **requires** prerequisites in order to run.
 
-### Overview
 
-This bot uses [LUIS](https://www.luis.ai), an AI based cognitive service, to implement language understanding.
 
-- [Node.js](https://nodejs.org) version 10.14 or higher
+## Bot Framework Emulator를 이용한 테스트
 
-    ```bash
-    # determine node version
-    node --version
-    ```
+[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator)은 봇 개발자가 로컬호스트에서 봇을 테스트하고 디버그하거나 터널을 통해 원격으로 실행할 수 있는 데스크톱 애플리케이션입니다.
 
-# To run the bot locally
-- Download the bot code from the Build blade in the Azure Portal (make sure you click "Yes" when asked "Include app settings in the downloaded zip file?").
-    - If you clicked "No" you will need to copy all the Application Settings properties from your App Service to your local .env file.
-- Install modules
+- Bot Framework Emulator version 4.9.0버전이나 더 높은 버전은  [여기](https://github.com/Microsoft/BotFramework-Emulator/releases)에서 설치할 수 있습니다.
 
-    ```bash
-    npm install
-    ```
-- Run the bot
+### Bot Framework Emulator를 이용하여 Local의 봇과 연결하는 방법
 
-    ```bash
-    npm start
-    ```
+- Bot Framework Emulator를 실행합니다.
+- File -> Open Bot을 선택합니다.
+- 봇의 URL자리에 `http://localhost:3978/api/messages`를 입력합니다.
 
-## Testing the bot using Bot Framework Emulator
+## Reference
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
-
-- Install the Bot Framework Emulator version 4.9.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
-
-### Connect to the bot using Bot Framework Emulator
-
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
-
-# Deploy the bot to Azure
-After creating the bot and testing it locally, you can deploy it to Azure to make it accessible from anywhere.
-To learn how, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete set of deployment instructions.
-
-## Further reading
-
+- [Azure Bot Service 설명서](https://docs.microsoft.com/ko-kr/azure/bot-service/?view=azure-bot-service-4.0)
+- [김영욱 멘토님의 Bot Framework Guide](https://github.com/KoreaEva/Bot)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Dialogs](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0)
