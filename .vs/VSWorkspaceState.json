@@ -5,9 +5,8 @@
     "\\cognitiveModels",
     "\\dialogs",
     "\\PostDeployScripts",
-    "\\Properties",
     "\\Properties\\PublishProfiles"
   ],
-  "SelectedNode": "\\bots\\dialogAndWelcomeBot.js",
+  "SelectedNode": "\\deploy.cmd",
   "PreviewInSolutionExplorer": false
 }

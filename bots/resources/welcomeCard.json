@@ -5,7 +5,7 @@
   "body": [
     {
       "type": "Image",
-      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtB3AwMUeNoq4gUBGe6Ocj8kyh3bXa9ZbV7u1fVKQoyKFHdkqU",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSjpjGopK5ef6NeddLiMRMD0vfogtLGysei4A&usqp=CAU",
       "size": "stretch"
     },
     {
@@ -13,7 +13,7 @@
       "spacing": "medium",
       "size": "default",
       "weight": "bolder",
-      "text": "Welcome to Bot Framework!",
+      "text": "저녁 뭐먹지입니다. 만나서 반갑습니다.",
       "wrap": true,
       "maxLines": 0
     },
@@ -21,7 +21,7 @@
       "type": "TextBlock",
       "size": "default",
       "isSubtle": true,
-      "text": "Now that you have successfully run your bot, follow the links in this Adaptive Card to expand your knowledge of Bot Framework.",
+      "text": "저희 저녁뭐먹지 봇은 하루의 섭취칼로리 / 소모칼로리를 비교하여 저녁을 뭘 먹으면 좋을지, 저녁 먹고 무슨 운동을 하고 자야 할 지 추천해줍니다.",
       "wrap": true,
       "maxLines": 0
     }
@@ -29,18 +29,13 @@
   "actions": [
     {
       "type": "Action.OpenUrl",
-      "title": "Get an overview",
+      "title": "사용법",
       "url": "https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0"
     },
     {
       "type": "Action.OpenUrl",
-      "title": "Ask a question",
+      "title": "문의",
       "url": "https://stackoverflow.com/questions/tagged/botframework"
-    },
-    {
-      "type": "Action.OpenUrl",
-      "title": "Learn how to deploy",
-      "url": "https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-deploy-azure?view=azure-bot-service-4.0"
     }
   ]
 }
