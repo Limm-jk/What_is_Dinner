@@ -20,6 +20,7 @@ const { FlightBookingRecognizer } = require('./dialogs/flightBookingRecognizer')
 
 // This bot's main dialog.
 const { DialogAndWelcomeBot } = require('./bots/dialogAndWelcomeBot');
+const { echoBot } = require('./bots/EchoBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
 // the bot's booking dialog
@@ -79,7 +80,8 @@ const luisRecognizer = new FlightBookingRecognizer(luisConfig);
 // Create the main dialog.
 const bookingDialog = new BookingDialog(BOOKING_DIALOG);
 const dialog = new MainDialog(luisRecognizer, bookingDialog);
-const bot = new DialogAndWelcomeBot(conversationState, userState, dialog);
+// const bot = new DialogAndWelcomeBot(conversationState, userState, dialog);
+const bot = echoBot();
 
 // Create HTTP server
 const server = restify.createServer();
