@@ -1,7 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { ActivityHandler, MessageFactory } = require('botbuilder');
+const { ActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
+const WelcomeCard = require('./resources/welcomeCard.json');
 
 class EchoBot extends ActivityHandler {
     constructor() {
