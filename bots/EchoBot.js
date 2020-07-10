@@ -16,10 +16,10 @@ class EchoBot extends ActivityHandler {
 
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
-            const welcomeText = 'Hello and welcome!';
             for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
-                    await context.sendActivity(MessageFactory.text(welcomeText, welcomeText));
+                    const welcomeCard = CardFactory.adaptiveCard(WelcomeCard);
+                    await context.sendActivity({ attachments: [welcomeCard] });
                 }
             }
             // By calling next() you ensure that the next BotHandler is run.
