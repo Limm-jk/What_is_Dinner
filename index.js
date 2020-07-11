@@ -58,7 +58,7 @@ const onTurnErrorHandler = async (context, error) => {
     );
 
     // Send a message to the user
-    let onTurnErrorMessage = 'The bot encountered an error or bug.';
+    let onTurnErrorMessage = '아ㅏ아아아아ㅏ앙 왜 또 에러야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
     onTurnErrorMessage = 'To continue to run this bot, please fix the bot source code.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
@@ -90,7 +90,7 @@ const bookingDialog = new BookingDialog(BOOKING_DIALOG);
 const dialog = new MainDialog(luisRecognizer, bookingDialog);
 // const bot = new DialogAndWelcomeBot(conversationState, userState, dialog); Core Bot
 // const bot = new EchoBot(); Echo Bot
-const bot = new QnABot(configuration);
+const bot = new QnABot(configuration, {});
 
 // Create HTTP server
 const server = restify.createServer();
