@@ -60,7 +60,7 @@ const onTurnErrorHandler = async (context, error) => {
     // Send a message to the user
     let onTurnErrorMessage = '아ㅏ아아아아ㅏ앙 왜 또 에러야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
-    onTurnErrorMessage = 'To continue to run this bot, please fix the bot source code.';
+    onTurnErrorMessage = '봇을 계속 실행시키기 위하여, 소스코드의 수정이 필요합니다.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
     // Clear out state
     await conversationState.delete(context);
