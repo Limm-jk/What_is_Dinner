@@ -21,6 +21,7 @@ const { FlightBookingRecognizer } = require('./dialogs/flightBookingRecognizer')
 // This bot's main dialog.
 const { DialogAndWelcomeBot } = require('./bots/dialogAndWelcomeBot');
 const { EchoBot } = require('./bots/EchoBot');
+const { QnABot } = require('./bots/QnABot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
 // the bot's booking dialog
@@ -33,6 +34,13 @@ const adapter = new BotFrameworkAdapter({
     appId: process.env.MicrosoftAppId,
     appPassword: process.env.MicrosoftAppPassword
 });
+
+// Map knowledge base endpoint values from .env file into the required format for `QnAMaker`.
+const configuration = {
+    knowledgeBaseId: process.env.QnAKnowledgebaseId,
+    endpointKey: process.env.QnAAuthKey,
+    host: process.env.QnAEndpointHostName
+ };
 
 // Catch-all for errors.
 const onTurnErrorHandler = async (context, error) => {
@@ -50,7 +58,7 @@ const onTurnErrorHandler = async (context, error) => {
     );
 
     // Send a message to the user
-    let onTurnErrorMessage = 'The bot encountered an error or bug.';
+    let onTurnErrorMessage = '아ㅏ아아아아ㅏ앙 왜 또 에러야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
     onTurnErrorMessage = 'To continue to run this bot, please fix the bot source code.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
@@ -80,8 +88,9 @@ const luisRecognizer = new FlightBookingRecognizer(luisConfig);
 // Create the main dialog.
 const bookingDialog = new BookingDialog(BOOKING_DIALOG);
 const dialog = new MainDialog(luisRecognizer, bookingDialog);
-// const bot = new DialogAndWelcomeBot(conversationState, userState, dialog);
-const bot = new EchoBot();
+// const bot = new DialogAndWelcomeBot(conversationState, userState, dialog); Core Bot
+// const bot = new EchoBot(); Echo Bot
+const bot = new QnABot(configuration, {});
 
 // Create HTTP server
 const server = restify.createServer();
