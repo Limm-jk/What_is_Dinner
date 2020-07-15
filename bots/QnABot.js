@@ -4,6 +4,7 @@
 const { ActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 const WelcomeCard = require('./resources/welcomeCard.json');
 const { QnAMaker } = require('botbuilder-ai');
+const Convenience = ['GS','이마트','세븐일레븐','CU'];
 
 class QnABot extends ActivityHandler {
     constructor(configuration, qnaOptions) {
@@ -19,7 +20,13 @@ class QnABot extends ActivityHandler {
         
             // If an answer was received from QnA Maker, send the answer back to the user.
             if (qnaResults[0]) {
-                await context.sendActivity(qnaResults[0].answer);
+                if(qnaResults[0].answer == "지옥"){
+                    const replyText = '친구... 커플이군요..?';
+                    await context.sendActivity(MessageFactory.text(replyText, replyText));
+                }
+                else{
+                    await context.sendActivity(qnaResults[0].answer);
+                }
             }
             else {
                 // If no answers were returned from QnA Maker, reply with help.
