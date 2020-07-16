@@ -6,6 +6,20 @@ const WelcomeCard = require('./resources/welcomeCard.json');
 const { QnAMaker } = require('botbuilder-ai');
 const Convenience = ['GS','이마트','세븐일레븐','CU'];
 
+//json 크롤링
+// var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+// var request = new XMLHttpRequest();
+// request.open('GET', requestURL);
+// request.responseType = 'json';
+// request.send();
+
+// request.onload = function() {
+//     var Event_Info = request.response;
+//     populateHeader(Event_Info);
+// }
+const jsonObj = require('./resources/test.json');
+// var jsonObj = JSON.parse(test_Data);
+
 class QnABot extends ActivityHandler {
     constructor(configuration, qnaOptions) {
         super();
@@ -22,7 +36,12 @@ class QnABot extends ActivityHandler {
             if (qnaResults[0]) {
                 if(qnaResults[0].answer == "지옥"){
                     const replyText = '친구... 커플이군요..?';
+                    var product_List = '';
                     await context.sendActivity(MessageFactory.text(replyText, replyText));
+                    for(var i = 0 ; i <jsonObj['pokemon'].length; i++){
+                        product_List.concat(jsonObj['pokemon'][i].name + " / " + jsonObj['pokemon'][i].price+"\n");
+                    }
+                    await context.sendActivity(MessageFactory.text(product_List, product_List));
                 }
                 else{
                     await context.sendActivity(qnaResults[0].answer);
