@@ -1,3 +1,11 @@
+/**
+ * @author [Limm-jk]
+ * @email [201602057@cs-cnu.org]
+ * @create date 2020-07-17 17:19:24
+ * @modify date 2020-07-17 17:19:24
+ * @desc [QnAbot - 편의점의 할인 정보와 조합법을 알려줌]
+ */
+
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
@@ -37,13 +45,17 @@ class QnABot extends ActivityHandler {
         
             // If an answer was received from QnA Maker, send the answer back to the user.
             if (qnaResults[0]) {
-                if(qnaResults[0].answer == "지옥"){
-                    const replyText = '친구... 커플이군요..?';
+                if(qnaResults[0].answer == "CU플러스"){
+                    const replyText = 'CU플러스 행사중인 상품 중 추천 목록입니다.';
                     await context.sendActivity(MessageFactory.text(replyText, replyText));
                     for(var i = 0 ; i <jsonObj["conv"].length; i++){
                         var yText = jsonObj["conv"][i].name + " / " + jsonObj["conv"][i].price+"\n";
                         await context.sendActivity(MessageFactory.text(yText, yText));
                     }
+                }
+                else if(qnaResults[0].answer == "마크정식"){
+                    const replyText = '재료 : 자이언트 떡볶이, 콕콕콕 스파게티, 치즈, 후랑크\n 1. 떡볶이는 물을 약간 적게! + 전자레인지 3분! 소세지는 30초! \n 2. 완료된 스파게티와 떡볶이를 섞고 그 위에 다 올려~~ \n 3. 전자레인지에 30초 돌려주면 완성!';
+                    await context.sendActivity(MessageFactory.text(replyText, replyText));
                 }
                 else{
                     await context.sendActivity(qnaResults[0].answer);

@@ -30,7 +30,7 @@
     {
       "type": "Action.OpenUrl",
       "title": "사용법",
-      "url": "https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0"
+      "url": "https://github.com/Limm-jk/What_is_Dinner/blob/master/README.md"
     },
     {
       "type": "Action.OpenUrl",

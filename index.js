@@ -16,17 +16,15 @@ const restify = require('restify');
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter, ConversationState, InputHints, MemoryStorage, UserState } = require('botbuilder');
 
-const { FlightBookingRecognizer } = require('./dialogs/flightBookingRecognizer');
+// const { FlightBookingRecognizer } = require('./dialogs/flightBookingRecognizer');
 
-// This bot's main dialog.
-const { DialogAndWelcomeBot } = require('./bots/dialogAndWelcomeBot');
 const { EchoBot } = require('./bots/EchoBot');
 const { QnABot } = require('./bots/QnABot');
-const { MainDialog } = require('./dialogs/mainDialog');
+// const { MainDialog } = require('./dialogs/mainDialog');
 
 // the bot's booking dialog
-const { BookingDialog } = require('./dialogs/bookingDialog');
-const BOOKING_DIALOG = 'bookingDialog';
+// const { BookingDialog } = require('./dialogs/bookingDialog');
+// const BOOKING_DIALOG = 'bookingDialog';
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -58,7 +56,7 @@ const onTurnErrorHandler = async (context, error) => {
     );
 
     // Send a message to the user
-    let onTurnErrorMessage = '아ㅏ아아아아ㅏ앙 왜 또 에러야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ.';
+    let onTurnErrorMessage = '예상치 못한 에러가 발생했습니다.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
     onTurnErrorMessage = '봇을 계속 실행시키기 위하여, 소스코드의 수정이 필요합니다.';
     await context.sendActivity(onTurnErrorMessage, onTurnErrorMessage, InputHints.ExpectingInput);
@@ -75,21 +73,21 @@ adapter.onTurnError = onTurnErrorHandler;
 // For local development, in-memory storage is used.
 // CAUTION: The Memory Storage used here is for local bot debugging only. When the bot
 // is restarted, anything stored in memory will be gone.
-const memoryStorage = new MemoryStorage();
-const conversationState = new ConversationState(memoryStorage);
-const userState = new UserState(memoryStorage);
+// const memoryStorage = new MemoryStorage();
+// const conversationState = new ConversationState(memoryStorage);
+// const userState = new UserState(memoryStorage);
 
-// If configured, pass in the FlightBookingRecognizer.  (Defining it externally allows it to be mocked for tests)
-const { LuisAppId, LuisAPIKey, LuisAPIHostName } = process.env;
-const luisConfig = { applicationId: LuisAppId, endpointKey: LuisAPIKey, endpoint: `https://${ LuisAPIHostName }` };
+// // If configured, pass in the FlightBookingRecognizer.  (Defining it externally allows it to be mocked for tests)
+// const { LuisAppId, LuisAPIKey, LuisAPIHostName } = process.env;
+// const luisConfig = { applicationId: LuisAppId, endpointKey: LuisAPIKey, endpoint: `https://${ LuisAPIHostName }` };
 
-const luisRecognizer = new FlightBookingRecognizer(luisConfig);
+// const luisRecognizer = new FlightBookingRecognizer(luisConfig);
 
-// Create the main dialog.
-const bookingDialog = new BookingDialog(BOOKING_DIALOG);
-const dialog = new MainDialog(luisRecognizer, bookingDialog);
+// // Create the main dialog.
+// const bookingDialog = new BookingDialog(BOOKING_DIALOG);
+// const dialog = new MainDialog(luisRecognizer, bookingDialog);
 // const bot = new DialogAndWelcomeBot(conversationState, userState, dialog); Core Bot
-// const bot = new EchoBot(); Echo Bot
+// const bot = new EchoBot(); //Echo Bot
 const bot = new QnABot(configuration, {});
 
 // Create HTTP server
@@ -97,6 +95,7 @@ const server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function() {
     console.log(`\n${ server.name } listening to ${ server.url }`);
     console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
+    console.log('\nAuthor - Limm-jk / Powered by Node.js');
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
 
