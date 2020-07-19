@@ -21,7 +21,7 @@
       "type": "TextBlock",
       "size": "default",
       "isSubtle": true,
-      "text": "저희 저녁뭐먹지 봇은 하루의 섭취칼로리 / 소모칼로리를 비교하여 저녁을 뭘 먹으면 좋을지, 저녁 먹고 무슨 운동을 하고 자야 할 지 추천해줍니다.",
+      "text": "저희 저녁뭐먹지 봇은 알기 어려운 편의점의 이벤트 상품을 미리 알려줘서 합리적인 선택을 도우고, 편의점만의 유니크한 레시피를 공유하여, 편의점에서도 멋있는 한끼를 즐길 수 있도록 돕습니다.",
       "wrap": true,
       "maxLines": 0
     }
@@ -35,7 +35,7 @@
     {
       "type": "Action.OpenUrl",
       "title": "문의",
-      "url": "https://stackoverflow.com/questions/tagged/botframework"
+      "url": "https://limm-jk.tistory.com/"
     }
   ]
 }
