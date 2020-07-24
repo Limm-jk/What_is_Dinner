@@ -12,29 +12,12 @@
 const { ActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 const WelcomeCard = require('./resources/welcomeCard.json');
 const { QnAMaker } = require('botbuilder-ai');
-const Convenience = ['GS','이마트','세븐일레븐','CU'];
-
-//json 크롤링
-// var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
-// var request = new XMLHttpRequest();
-// request.open('GET', requestURL);
-// request.responseType = 'json';
-// request.send();
-
-// request.onload = function() {
-//     var Event_Info = request.response;
-//     populateHeader(Event_Info);
-// }
-// const test_Data = require('./resources/test.json');
-// var jsonObj = JSON.parse(test_Data);
 const path = require('path')
 const fs = require('fs');
-const { plugins } = require('restify');
-const { SSL_OP_ALL } = require('constants');
-var jsonObj = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/test.json'), 'utf8'));
 var Conv = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/EventList_200724.json'), 'utf8'));
 var recipe = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/recipe.json'), 'utf8'));
-const cuplus_length = Conv["cu_plus"].length
+const cuplus_length = Conv["cu_plus"].length;
+const cumorning_length = Conv["cu_morning"].length;
 
 class QnABot extends ActivityHandler {
     constructor(configuration, qnaOptions) {
@@ -51,7 +34,6 @@ class QnABot extends ActivityHandler {
             // If an answer was received from QnA Maker, send the answer back to the user.
             if (qnaResults[0]) {
                 var Qna_Answer = "";
-                var debug_str = "";
                 Qna_Answer += qnaResults[0].answer;
                 // 01- = meal
                 // 02- = drink
@@ -71,7 +53,11 @@ class QnABot extends ActivityHandler {
                             // In recipe, Category "meal"
                             var recipe_index = Qna_Answer.split("-");
                             recipe_index = parseInt(recipe_index[1]);
-                        
+
+                            var recipe_name = recipe["meal"][recipe_index].name;
+                            var recipe_text = recipe_name + "알려드릴게요! \n\n 야.. 너두 만들 수 있어..!"
+                            await context.sendActivity(MessageFactory.text(recipe_text, recipe_text));
+
                             var replyText = "재료 : " + recipe["meal"][recipe_index].stuff + "\n\n\n\n ☆레시피☆ \n" + recipe["meal"][recipe_index].recipe;
                             await context.sendActivity(MessageFactory.text(replyText, replyText));
 
@@ -80,6 +66,10 @@ class QnABot extends ActivityHandler {
                             // In recipe, Category "drink"
                             var recipe_index = Qna_Answer.split("-");
                             recipe_index = parseInt(recipe_index[1]);
+
+                            var recipe_name = recipe["drink"][recipe_index].name;
+                            var recipe_text = recipe_name + "알려드릴게요! \n\n 야.. 너두 만들 수 있어..!"
+                            await context.sendActivity(MessageFactory.text(recipe_text, recipe_text));
                         
                             var replyText = "재료 : " + recipe["drink"][recipe_index].stuff + "\n\n\n\n ☆레시피☆ \n" + recipe["drink"][recipe_index].recipe;
                             await context.sendActivity(MessageFactory.text(replyText, replyText));
@@ -89,6 +79,10 @@ class QnABot extends ActivityHandler {
                             // In recipe, Category "snack"
                             var recipe_index = Qna_Answer.split("-");
                             recipe_index = parseInt(recipe_index[1]);
+
+                            var recipe_name = recipe["snack"][recipe_index].name;
+                            var recipe_text = recipe_name + "알려드릴게요! \n\n 야.. 너두 만들 수 있어..!"
+                            await context.sendActivity(MessageFactory.text(recipe_text, recipe_text));
                         
                             var replyText = "재료 : " + recipe["snack"][recipe_index].stuff + "\n\n\n\n ☆레시피☆ \n" + recipe["snack"][recipe_index].recipe;
                             await context.sendActivity(MessageFactory.text(replyText, replyText));
@@ -96,7 +90,7 @@ class QnABot extends ActivityHandler {
                             break;
                         case 4:
                             // CU Event / Plus
-                            const plusText = 'CU 플러스 행사중인 상품 중 추천 목록입니다.';
+                            var plusText = 'CU 플러스 행사중인 상품 중 추천 목록입니다. \n\n\n 다른 값을 얻고 싶으시다면 "플러스"라고 다시 입력해주세요!';
                             await context.sendActivity(MessageFactory.text(plusText, plusText));
 
                             var recommend_arr = []
@@ -112,11 +106,11 @@ class QnABot extends ActivityHandler {
                             break;
                         case 5:
                             // CU Event / morning
-                            const plusText = 'CU 아침애 행사중인 상품 중 추천 목록입니다.';
+                            var plusText = 'CU 아침애 행사중인 상품 중 추천 목록입니다. \n\n\n 다른 값을 얻고 싶으시다면 "아침"이라고 다시 입력해주세요!';
                             await context.sendActivity(MessageFactory.text(plusText, plusText));
 
                             var recommend_arr = []
-                            for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cuplus_length));
+                            for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cumorning_length));
 
                             for(var i = 0 ; i <cuplus_length; i++){
                                 if(recommend_arr.includes(i)){
@@ -135,57 +129,6 @@ class QnABot extends ActivityHandler {
                 else{
                     await context.sendActivity(qnaResults[0].answer);
                 }
-                // switch(qnaResults[0].answer){
-                //     case "CU플러스":
-                //         const replyText = 'CU플러스 행사중인 상품 중 추천 목록입니다.';
-                //         await context.sendActivity(MessageFactory.text(replyText, replyText));
-                //         var result = 0
-                //         var recommend_arr = []
-                //         for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cuplus_length) + 1);
-                //         for(var i = 0 ; i <cuplus_length; i++){
-                //             if(recommend_arr.includes(i)){
-                //                 var yText = Conv["cu_plus"][i].name + " / " +  Conv["cu_plus"][i].price+"\n";
-                //                 await context.sendActivity(MessageFactory.text(yText, yText));
-                //             }  
-                //         }
-                //         break;
-                // }
-                // if(qnaResults[0].answer == "CU플러스"){
-                //     const replyText = 'CU플러스 행사중인 상품 중 추천 목록입니다.';
-                //     await context.sendActivity(MessageFactory.text(replyText, replyText));
-
-                //     var recommend_arr = []
-                //     for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cuplus_length) + 1);
-                //     for(var i = 0 ; i <cuplus_length; i++){
-                //         if(recommend_arr.includes(i)){
-                //             var yText = Conv["cu_plus"][i].name + " / " +  Conv["cu_plus"][i].price+"\n";
-                //             await context.sendActivity(MessageFactory.text(yText, yText));
-                //         }  
-                //     }
-                // }
-                // else if(qnaResults[0].answer == "마크정식"){
-                //     var replyText = "";
-
-                //     var recipe_find_Text = qnaResults[0].answer + "! " + "레시피 알려드릴게요!";
-                //     await context.sendActivity(MessageFactory.text(recipe_find_Text, recipe_find_Text));
-
-                //     for(var i = 0 ; i <recipe["meal"].length; i++){
-                //         if(recipe["meal"][i].name == "마크정식"){
-                //             replyText = "재료 : " + recipe["meal"][i].stuff + "\n\n\n\n ☆레시피☆ \n" + recipe["meal"][i].recipe;
-                //             await context.sendActivity(MessageFactory.text(replyText, replyText));
-                //             break;
-                //         }
-                //         var replyTex = recipe["meal"][i].name;
-                //         await context.sendActivity(MessageFactory.text(replyTex, replyTex));
-                //     }
-                //     if (replyText == "") {
-                //         const error_recipe = "레시피를 찾지 못했어요 ㅠㅠ 다른 레시피를 검색해주세요.";
-                //         await context.sendActivity(MessageFactory.text(error_recipe, error_recipe));
-                //     } 
-                // }
-                // else{
-                //     await context.sendActivity(qnaResults[0].answer);
-                // }
             }
             else {
                 // If no answers were returned from QnA Maker, reply with help.
