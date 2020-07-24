@@ -31,6 +31,7 @@ const path = require('path')
 const fs = require('fs');
 var jsonObj = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/test.json'), 'utf8'));
 var Conv = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/EventList_200724.json'), 'utf8'));
+var recipe = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/recipe.json'), 'utf8'));
 const cuplus_length = Conv["cu_plus"].length
 
 class QnABot extends ActivityHandler {
@@ -76,8 +77,24 @@ class QnABot extends ActivityHandler {
                     }
                 }
                 else if(qnaResults[0].answer == "마크정식"){
-                    const replyText = '재료 : 자이언트 떡볶이, 콕콕콕 스파게티, 치즈, 후랑크\n 1. 떡볶이는 물을 약간 적게! + 전자레인지 3분! 소세지는 30초! \n 2. 완료된 스파게티와 떡볶이를 섞고 그 위에 다 올려~~ \n 3. 전자레인지에 30초 돌려주면 완성!';
+                    var replyText = "";
+
+                    recipe_find_Text = qnaResults[0].answer + "!" + "레시피 알려드릴게요!";
                     await context.sendActivity(MessageFactory.text(replyText, replyText));
+
+                    for(var i = 0 ; i <recipe["meal"].length; i++){
+                        if(recipe["meal"][i].name == "마크정식"){
+                            replyText = recipe["meal"][i].stuff + "\n" + recipe["meal"][i].recipe;
+                            await context.sendActivity(MessageFactory.text(replyText, replyText));
+                            break;
+                        }
+                        var replyTex = recipe["meal"][i].name;
+                        await context.sendActivity(MessageFactory.text(replyTex, replyTex));
+                    }
+                    if (replyText == "") {
+                        const error_recipe = "레시피를 찾지 못했어요 ㅠㅠ 다른 레시피를 검색해주세요.";
+                        await context.sendActivity(MessageFactory.text(error_recipe, error_recipe));
+                    } 
                 }
                 else{
                     await context.sendActivity(qnaResults[0].answer);
