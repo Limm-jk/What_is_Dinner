@@ -10,6 +10,10 @@
 * 특정 메뉴를 고르면 그 메뉴를 기반으로 한 편의점 레시피 추천. or 어떤 스타일의 레시피 추천
 * Test in https://today-dinner.azurewebsites.net/
 
+### 구현 기능
+* 편의점 이벤트 정보 확인(크롤러 사용해서 긁어온 정보 셀프 업로드, 크롤러도 호스팅하면 자동화 가능)
+* 편의점 레시피 추천(유명한 레시피 DB화하여 원하는 레시피 업로드)
+
 ![pages](./test_pages.png)
 
 ### ISSUE
@@ -39,10 +43,16 @@ TO DO : MVP 0.5까지 완료 후 구조 그림과 함께 작성
 - Bot Framework Emulator version 4.9.0버전이나 더 높은 버전은  [여기](https://github.com/Microsoft/BotFramework-Emulator/releases)에서 설치할 수 있습니다.
 
 ### Bot Framework Emulator를 이용하여 Local의 봇과 연결하는 방법
-
 - Bot Framework Emulator를 실행합니다.
 - File -> Open Bot을 선택합니다.
 - 봇의 URL자리에 `http://localhost:3978/api/messages`를 입력합니다.
+
+## 개발 전략
+- Bot Framework의 구조를 Reference를 통해 이해함.
+- 개발 간에 기능에 따른 확실한 분업 / 협업을 수행함.
+- Git Hub 내의 Issue / Actions등 써보지 못했던 기능들을 적극 채용해봄. (Actions의 Flow는 삭제....)
+- Node.js에 대한 첫 도전인 만큼, Node.js에 친숙해질 수 있도록 노력함.
+- 깔끔하게 정리된 ReadMe를 통하여 남이 보거나, 이후에 봐도 이해할 수 있도록 함.
 
 ## Reference
 
