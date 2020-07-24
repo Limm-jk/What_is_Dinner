@@ -13,7 +13,7 @@
       "spacing": "medium",
       "size": "default",
       "weight": "bolder",
-      "text": "저녁 뭐먹지입니다. 만나서 반갑습니다.",
+      "text": "편의점에서의 우아한 한끼 식사! 편스토랑입니다!",
       "wrap": true,
       "maxLines": 0
     },
@@ -21,7 +21,7 @@
       "type": "TextBlock",
       "size": "default",
       "isSubtle": true,
-      "text": "저희 저녁뭐먹지 봇은 알기 어려운 편의점의 이벤트 상품을 미리 알려줘서 합리적인 선택을 도우고, 편의점만의 유니크한 레시피를 공유하여, 편의점에서도 멋있는 한끼를 즐길 수 있도록 돕습니다.",
+      "text": "1. 알기 어려운 편의점의 이벤트 상품을 미리 알려드려, 합리적 선택을 공백돕습니다. \n 2. 편의점의 Unique하고 Fun한 레시피를 공유해 편의점에서의 우아한 공백한끼를 책임집니다. \n\n\n 저희 편스토랑 봇 많이 사랑해주세요!! \n\n\n 버그 문의 : junkyu.lim.dev@gmail.com",
       "wrap": true,
       "maxLines": 0
     }
