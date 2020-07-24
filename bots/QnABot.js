@@ -30,6 +30,8 @@ const Convenience = ['GS','이마트','세븐일레븐','CU'];
 const path = require('path')
 const fs = require('fs');
 var jsonObj = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/test.json'), 'utf8'));
+var Conv = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/EventList_200724.json'), 'utf8'));
+const cuplus_length = Conv["cu_plus"].length
 
 class QnABot extends ActivityHandler {
     constructor(configuration, qnaOptions) {
@@ -45,12 +47,32 @@ class QnABot extends ActivityHandler {
         
             // If an answer was received from QnA Maker, send the answer back to the user.
             if (qnaResults[0]) {
+                // switch(qnaResults[0].answer){
+                //     case "CU플러스":
+                //         const replyText = 'CU플러스 행사중인 상품 중 추천 목록입니다.';
+                //         await context.sendActivity(MessageFactory.text(replyText, replyText));
+                //         var result = 0
+                //         var recommend_arr = []
+                //         for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cuplus_length) + 1);
+                //         for(var i = 0 ; i <cuplus_length; i++){
+                //             if(recommend_arr.includes(i)){
+                //                 var yText = Conv["cu_plus"][i].name + " / " +  Conv["cu_plus"][i].price+"\n";
+                //                 await context.sendActivity(MessageFactory.text(yText, yText));
+                //             }  
+                //         }
+                //         break;
+                // }
                 if(qnaResults[0].answer == "CU플러스"){
                     const replyText = 'CU플러스 행사중인 상품 중 추천 목록입니다.';
                     await context.sendActivity(MessageFactory.text(replyText, replyText));
-                    for(var i = 0 ; i <jsonObj["conv"].length; i++){
-                        var yText = jsonObj["conv"][i].name + " / " + jsonObj["conv"][i].price+"\n";
-                        await context.sendActivity(MessageFactory.text(yText, yText));
+                    var result = 0
+                    var recommend_arr = []
+                    for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cuplus_length) + 1);
+                    for(var i = 0 ; i <cuplus_length; i++){
+                        if(recommend_arr.includes(i)){
+                            var yText = Conv["cu_plus"][i].name + " / " +  Conv["cu_plus"][i].price+"\n";
+                            await context.sendActivity(MessageFactory.text(yText, yText));
+                        }  
                     }
                 }
                 else if(qnaResults[0].answer == "마크정식"){
