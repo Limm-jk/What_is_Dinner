@@ -112,6 +112,19 @@ class QnABot extends ActivityHandler {
                             break;
                         case 5:
                             // CU Event / morning
+                            const plusText = 'CU 아침애 행사중인 상품 중 추천 목록입니다.';
+                            await context.sendActivity(MessageFactory.text(plusText, plusText));
+
+                            var recommend_arr = []
+                            for (var j = 0 ; j < 5; j++) recommend_arr.push(Math.floor(Math.random() * cuplus_length));
+
+                            for(var i = 0 ; i <cuplus_length; i++){
+                                if(recommend_arr.includes(i)){
+                                    var replyText = Conv["cu_morning"][i].name + " / " +  Conv["cu_morning"][i].price+"\n";
+                                    await context.sendActivity(MessageFactory.text(replyText, replyText));
+                                }  
+                            }
+
                             break;
                         default:
                             await context.sendActivity(qnaResults[0].answer);
