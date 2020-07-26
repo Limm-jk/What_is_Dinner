@@ -44,7 +44,20 @@
 
 - Bot Framework Emulator version 4.9.0버전이나 더 높은 버전은  [여기](https://github.com/Microsoft/BotFramework-Emulator/releases)에서 설치할 수 있습니다.
 
+### 주요 File
+- **index.js**  
+사실 상 메인. 클라우드 서비스에서 이 파일이 가장 먼저 실행되며, 로컬 테스트 시에도 이 파일을 실행하여 확인 가능.
+- **bots/QnAbot.js**  
+대부분의 기능을 가진 파일. index.js에서 QnAMaker의 정보를 받아 만들어지며, 질문이 들어오면 QnAMaker의 EndPoint에서 답변을 확인하여 가져온다.  
+필요한 DB를 여기에 모아 사용하기에, DB가 필요한 응답은 여기서 캐치해서 새로운 응답을 만들어준다.
+- **bots/resources/welcomeCard.json**  
+첫 시작 시에 출력되는 카드의 정보를 담고있음. 이름과 간단한 설명 / 추가정보를 가진다.  
+- **bots/resources/EventList.json + recipe.json**  
+json을 이용해 만든 DB. EventList는 하단에 작성한 크롤러를 통해서 도출해 낸 파일을 업로드해둔다. 크롤러도 웹 상에 올라가면 자동화가 가능해보인다.  
+recipe.json은 여러 레시피들을 저장하여, 특정한 답변이 올 시에, 출력해준다.
+
 ### Bot Framework Emulator를 이용하여 Local의 봇과 연결하는 방법
+- index.js파일을 실행시킵니다.
 - Bot Framework Emulator를 실행합니다.
 - File -> Open Bot을 선택합니다.
 - 봇의 URL자리에 `http://localhost:3978/api/messages`를 입력합니다.
