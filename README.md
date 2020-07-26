@@ -51,8 +51,8 @@
 
 ## 추가자료
 ### 시연영상 및 코드영상
-[시연 영상]()  
-[코드 설명 영상]()  
+[시연 영상](https://www.youtube.com/watch?v=BvIVmT2FwL4&feature=youtu.be)  
+[코드 설명 영상](https://www.youtube.com/watch?v=gLoibRmkxKw)  
 ### 관련 Repository
 [이벤트 크롤러](https://github.com/What-is-Dinner/-Convenience-Event)  
 [웹 서비스](https://github.com/What-is-Dinner/What-is-Dinner-Pages)
